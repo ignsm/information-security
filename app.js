@@ -13,15 +13,15 @@ $(document).ready(()=>{
         alert('Кириллица не поддерживается');
         return 0;
       }
-      // Если всё ок, то шифруем
+
       defaultText = encodeVal(defaultText);
       key = encodeVal(key);
-      let codedPhrase = decodeNewVal(fullEncode(defaultText, key)).join('');
-      // Выводим результат
+      let codedPhrase = decodeNewVal(
+          fullEncode(defaultText, key)
+        ).join('');
+
       $('.result').show();
-      $('.result').text(codedPhrase);
-    } else{
-      alert('Необходимо заполнить все поля')
-    }
-  })
+      document.getElementById('result').innerHTML = codedPhrase;
+    } else alert('Необходимо заполнить все поля')
+  });
 });
