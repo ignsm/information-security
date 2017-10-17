@@ -32,8 +32,8 @@ const comparator = (str, key) => {
 			full = 0;
 		str.forEach(el => {
 			compared[full] = [el, key[iter]];
-			iter++;
-			full++;
+			iter += 1;
+			full += 1;
 			if(iter >= keyLen) iter = 0;
 		});
 		return compared;
@@ -41,14 +41,14 @@ const comparator = (str, key) => {
 
 // Генерируем новую строку
 const fullEncode = (str, key) => {
-	let compared = comparator(str, key),
+	let compared = comparator(encodeVal(str), encodeVal(key)),
 			newWord = [],
 			alphabet = generateAlphabet();
 	for (let el in compared) {
-		let newChar = (compared[el][0] + compared[el][1]) % Object.keys(alphabet).length;
+		let newChar = (+compared[el][0] + +compared[el][1]) % Object.keys(alphabet).length;
 		newWord.push(newChar);
 	}
-	return newWord;
+	return decodeNewVal(newWord);
 }
 
 // Расшифровываем новую строку
@@ -64,5 +64,25 @@ const decodeNewVal = (arr) => {
 			}
 		}
 	}
-	return chars;
+	return chars.join('');
 }
+
+// Декодируем
+const fullDecode = (str, key) => {
+	let compared = comparator(encodeVal(str), encodeVal(key)),
+			alphabet = generateAlphabet(),
+			decoded = [];
+	let alphabetLength = Object.keys(alphabet).length
+	for (let val in compared) {
+		let decodedChar = (compared[val][0] - compared[val][1] + alphabetLength) % alphabetLength;
+		decoded.push(decodedChar);
+	}
+	return(decodeNewVal(decoded));
+}
+
+// Пример изспользования
+console.log('Кодируем слова "Information Security" по ключу "RANEPA"');
+let result = fullEncode("Information Security", "RANEPA");
+console.log("Результат:", result);
+let decodedResult = fullDecode(result, "RANEPA");
+console.log("Декодируем:", decodedResult);
