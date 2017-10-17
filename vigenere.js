@@ -2,7 +2,7 @@
 const generateAlphabet = () => {
 	let alphabet = {},
 		iter = 0;
-	for(let i = 0; i <= 127; i++){
+	for(let i = 32; i <= 127; i++){
 		alphabet[iter] = String.fromCharCode(i);
 		iter += 1;
 	}
