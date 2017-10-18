@@ -15,7 +15,7 @@ const encodeVal = (word) => {
 			len = word.length,
 			alphabet = generateAlphabet();
 	for(let i = 0; i <= len; i++){
-		for (var val in alphabet) {
+		for (let val in alphabet) {
 			if (word[i] == alphabet[val]) {
 				listCode.push(val);
 			}
@@ -58,7 +58,7 @@ const decodeNewVal = (arr) => {
 			alphabet = generateAlphabet();
 	// Получаем символы
 	for (let i = 0; i < wordLen; i++) {
-		for (var val in alphabet) {
+		for (let val in alphabet) {
 			if (arr[i] == val) {
 				chars.push(alphabet[val]);
 			}
@@ -73,8 +73,8 @@ const fullDecode = (str, key) => {
 			alphabet = generateAlphabet(),
 			decoded = [];
 	let alphabetLength = Object.keys(alphabet).length
-	for (let val in compared) {
-		let decodedChar = (compared[val][0] - compared[val][1] + alphabetLength) % alphabetLength;
+	for (let el in compared) {
+		let decodedChar = (compared[el][0] - compared[el][1] + alphabetLength) % alphabetLength;
 		decoded.push(decodedChar);
 	}
 	return(decodeNewVal(decoded));
